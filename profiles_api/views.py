@@ -1,13 +1,13 @@
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.authentication import TokenAuthentication
 from rest_framework import filters
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.settings import api_settings
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.settings import api_settings
+from rest_framework.viewsets import ModelViewSet
 
+from .models import ProfileFeedItem, UserProfile
 from .permissions import UpdateOwnProfile, UpdateOwnProfileStatus
-from .models import UserProfile, ProfileFeedItem
-from .serializers import UserProfileSerializer, ProfileFeedItemSerializer
+from .serializers import ProfileFeedItemSerializer, UserProfileSerializer
 
 
 class UserProfileViewSet(ModelViewSet):

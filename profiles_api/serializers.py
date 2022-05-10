@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import UserProfile, ProfileFeedItem
+from .models import ProfileFeedItem, UserProfile
 
 
 class UserProfileSerializer(ModelSerializer):
