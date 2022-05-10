@@ -5,8 +5,8 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 
 from .permissions import UpdateOwnProfile
-from .models import UserProfile
-from .serializers import UserProfileSerializer
+from .models import UserProfile, ProfileFeedItem
+from .serializers import UserProfileSerializer, ProfileFeedItemSerializer
 
 
 class UserProfileViewSet(ModelViewSet):
@@ -16,6 +16,15 @@ class UserProfileViewSet(ModelViewSet):
     permission_classes = (UpdateOwnProfile,)
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'email')
+
+
+class UserProfileFeedViewSet(ModelViewSet):
+    serializer_class = ProfileFeedItemSerializer
+    authentication_classes = (TokenAuthentication,)
+    queryset = ProfileFeedItem.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(user_profile=self.request.user)
 
 
 class UserLoginApiView(ObtainAuthToken):
